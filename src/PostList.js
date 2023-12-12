@@ -24,7 +24,7 @@ const PostList = ({ history }) => {
     <div>
       <h1>Список постов</h1>
       <ul>
-        {data.pages.map((page, pageIndex) => (
+        {data?.pages.map((page, pageIndex) => (
           <React.Fragment key={pageIndex}>
             {page.map((post) => (
               <li key={post.id}>

@@ -12,7 +12,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
-          <Route path="/" exact element={PostList} />
+          <Route path="/" exact element={<PostList/>} />
           <Route
             path="/post/:id"
             render={({ match, history }) => {

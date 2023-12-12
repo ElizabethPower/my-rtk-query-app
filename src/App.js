@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import PostList from './PostList';
@@ -11,8 +11,8 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <Switch>
-          <Route path="/" exact component={PostList} />
+        <Routes>
+          <Route path="/" exact element={PostList} />
           <Route
             path="/post/:id"
             render={({ match, history }) => {
@@ -20,7 +20,7 @@ const App = () => {
               return <PostDetail post={{ id: postId, title: 'Заголовок', body: 'Описание' }} history={history} />;
             }}
           />
-        </Switch>
+        </Routes>
       </Router>
       <ReactQueryDevtools />
     </QueryClientProvider>

@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import PostList from './PostList';
+import PostDetail from './PostDetail';
 
-function App() {
+const queryClient = new QueryClient();
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={PostList} />
+          <Route
+            path="/post/:id"
+            render={({ match, history }) => {
+              const postId = parseInt(match.params.id);
+              return <PostDetail post={{ id: postId, title: 'Заголовок', body: 'Описание' }} history={history} />;
+            }}
+          />
+        </Switch>
+      </Router>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
-}
+};
 
 export default App;
